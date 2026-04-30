@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | BLINK SHOT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --section-border: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: -0.025em;
+        }
+
+        .last-updated {
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 0.95rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: var(--text-main);
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--section-border);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+            color: var(--text-main);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .contact-info {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--section-border);
+            color: var(--text-light);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--section-border);
+            margin: 40px 0;
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 2rem; }
+            body { padding: 30px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: April 30, 2026</p>
+        </header>
+
+        <p class="intro">
+            Welcome to <strong>BLINK SHOT</strong>. Your privacy is critically important to us. This Privacy Policy describes how your personal information is collected, used, and shared when you play our game.
+        </p>
+
+        <section>
+            <h2>1. DATA COLLECTION & USE</h2>
+            
+            <h3>A. Camera Data & Face Detection</h3>
+            <p>BLINK SHOT uses the camera on your device to perform real-time face detection and eye-tracking for gameplay (detecting blinks).</p>
+            <ul>
+                <li><strong>Local Processing</strong>: All image and facial mesh data is processed <strong>locally</strong> on your device using on-device Machine Learning (ML Kit).</li>
+                <li><strong>No Storage</strong>: We do <strong>not</strong> record, store, or transmit raw camera feeds or facial images to our servers or any third parties.</li>
+                <li><strong>Purpose</strong>: This data is used solely to determine match outcomes within the active game session.</li>
+            </ul>
+
+            <h3>B. Account & Profile Data</h3>
+            <p>If you sign in using a social account (Google or Apple), we collect:</p>
+            <ul>
+                <li><strong>Identity</strong>: Your unique User ID and Display Name.</li>
+                <li><strong>Game Progress</strong>: Your prestige, coins (score), match history, wins, and losses.</li>
+                <li><strong>Customization</strong>: Your mascot color preference and theme settings.</li>
+            </ul>
+            <p>This data is stored securely in <strong>Firebase</strong> to provide cross-device persistence and leaderboard functionality.</p>
+        </section>
+
+        <section>
+            <h2>2. THIRD-PARTY SERVICES</h2>
+            <p>We utilize the following third-party services to enhance your experience:</p>
+            <ul>
+                <li><strong>Firebase (Google)</strong>: For authentication, cloud database (Firestore/Realtime Database), and analytics.</li>
+                <li><strong>WebRTC</strong>: For real-time multiplayer signaling (P2P). No data from these streams is recorded by us.</li>
+                <li><strong>Google Fonts</strong>: For typography rendering.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. DATA SECURITY</h2>
+            <p>We use industry-standard security measures provided by Firebase to protect your progress and profile data. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
+        </section>
+
+        <section>
+            <h2>4. USER CHOICES</h2>
+            <ul>
+                <li><strong>Anonymous Play</strong>: You can play BLINK SHOT anonymously without signing in. Note that progress will be lost if you delete the app or change devices.</li>
+                <li><strong>Data Deletion</strong>: You may request the deletion of your account and associated progress data at any time by contacting us through the support channels provided in the game settings.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. CHILDREN'S PRIVACY</h2>
+            <p>BLINK SHOT is designed for a general audience. We do not knowingly collect personal information from children under the age of 13. If you believe a child has provided us with personal data, please contact us immediately.</p>
+        </section>
+
+        <section>
+            <h2>6. CHANGES TO THIS POLICY</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this document.</p>
+        </section>
+
+        <section>
+            <h2>7. CONTACT US</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+            <div class="contact-info">
+                <strong>support@blinkshot.game</strong><br>
+                (or through the in-app support portal)
+            </div>
+        </section>
+
+        <div class="footer">
+            Created by the BLINK SHOT Team with a focus on fair play and privacy.
+        </div>
+    </div>
+</body>
+</html>
