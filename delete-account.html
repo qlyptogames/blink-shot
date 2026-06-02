@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account & Data Deletion | Blink Out</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --secondary: #ec4899;
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+            --accent-emerald: #10b981;
+            --bg-dark: #09070f;
+            --bg-card: rgba(18, 16, 26, 0.65);
+            --bg-nav: rgba(9, 7, 15, 0.85);
+            --border-color: rgba(139, 92, 246, 0.15);
+            --border-hover: rgba(217, 70, 239, 0.35);
+            --text-primary: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(217, 70, 239, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- STICKY NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-nav);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-eye {
+            width: 12px;
+            height: 12px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .logo-eye::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid var(--primary-light);
+            border-radius: 50%;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 6px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .nav-link.delete-btn {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: #fca5a5;
+        }
+
+        .nav-link.delete-btn.active {
+            background: var(--danger);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .nav-link.delete-btn.active::after {
+            display: none;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #fca5a5;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ef4444 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- DUAL GRID (INFO CARDS) --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 45px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .info-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h2 svg {
+            color: var(--primary-light);
+        }
+
+        .info-card.danger-card h2 svg {
+            color: var(--danger);
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .info-list li svg {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--primary-light);
+        }
+
+        .info-card.danger-card .info-list li svg {
+            color: var(--danger);
+        }
+
+        .info-list li strong {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* --- METHOD CHOICES CONTAINER --- */
+        .methods-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .methods-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .methods-title h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .methods-title p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- TABS --- */
+        .tabs-header {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 6px;
+            border-radius: 14px;
+            margin-bottom: 35px;
+            gap: 6px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-gradient);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        /* --- TAB PANELS --- */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* PANEL 1: IN-APP INSTRUCTIONS */
+        .step-list {
+            list-style: none;
+        }
+
+        .step-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 24px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 34px;
+            height: 34px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+
+        .step-item:hover .step-number {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PHONE MOCKUP (WOW EFFECT) --- */
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .phone-mockup {
+            width: 250px;
+            height: 480px;
+            background: #110e1a;
+            border: 8px solid #2e283d;
+            border-radius: 36px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(139, 92, 246, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: all 0.5s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+            box-shadow: 
+                0 30px 60px -10px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Phone Camera Notch */
+        .phone-notch {
+            width: 100px;
+            height: 16px;
+            background: #2e283d;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+        }
+
+        /* Phone UI Display Content */
+        .phone-screen {
+            flex: 1;
+            padding: 30px 16px 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .phone-header {
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .phone-menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .phone-menu-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding-left: 4px;
+        }
+
+        .phone-menu-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.8rem;
+            color: #e4e4e7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .phone-menu-item span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .phone-arrow {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .phone-btn-danger {
+            margin-top: auto;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
+            animation: dangerPulse 2s infinite;
+        }
+
+        @keyframes dangerPulse {
+            0% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.2); }
+            50% { box-shadow: 0 0 16px rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.22); }
+            100% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.2); }
+        }
+
+        /* PANEL 2: EMAIL REQUEST FORM */
+        .form-container {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-family: var(--font-main);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .radio-tile {
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .radio-tile input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-tile svg {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .radio-tile span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .radio-tile:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .radio-tile input:checked + svg {
+            color: var(--primary-light);
+        }
+
+        .radio-tile input:checked ~ span {
+            color: #fff;
+        }
+
+        .radio-tile.selected {
+            border-color: var(--primary-light);
+            background: rgba(139, 92, 246, 0.08);
+        }
+
+        .form-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            background: var(--primary-gradient);
+            border: none;
+            color: #fff;
+            padding: 14px;
+            border-radius: 10px;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .form-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .form-submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .tab-panel.active {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .mockup-container {
+                order: -1;
+            }
+            .methods-section {
+                padding: 24px;
+            }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- FIXED NAVBAR -->
+    <nav class="navbar" id="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" id="nav-logo-link">
+                <span class="logo-eye"></span>
+                Blink Out
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link" id="nav-policy-link">Privacy Policy</a>
+                <a href="delete-account.html" class="nav-link delete-btn active" id="nav-delete-link">Delete Account</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="badge">Security & Control</div>
+            <h1 id="main-title">Account Deletion</h1>
+            <p class="subtitle">Understand what data is removed and easily request your account deletion below.</p>
+        </header>
+
+        <!-- INFO DUAL CARDS -->
+        <div class="info-grid">
+            <!-- WHAT IS DELETED -->
+            <div class="info-card danger-card" id="card-deleted-data">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                    What data is deleted
+                </h2>
+                <p>When you trigger an account deletion request, the following information is permanently and irreversibly removed from our Firebase servers:</p>
+                <ul class="info-list">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <strong>Authentication Record:</strong> Your Firebase login identifiers (Google or Apple sign-in linking tokens).
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <strong>User Profile:</strong> Your display name, character customize configurations, and cosmetic options in Firestore.
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        <strong>Match History & Progress:</strong> High scores, game records, prestige levels, coin totals, wins, and losses.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- RETENTION POLICY -->
+            <div class="info-card" id="card-retention">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Data Retention Policy
+                </h2>
+                <p>We believe in strict data protection principles. We keep your data only as long as necessary, enforcing these automated timelines:</p>
+                <ul class="info-list">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <strong>Permanent Accounts:</strong> Accounts linked to Google/Apple credentials submitted via email request are fully purged within <strong>48 hours</strong>.
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <strong>Anonymous/Guest Accounts:</strong> Local progress profiles are automatically wiped from our server database after <strong>30 days of inactivity</strong>.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MAIN INTERACTIVE DELETION FLOWS -->
+        <div class="methods-section" id="section-deletion-flow">
+            <div class="methods-title">
+                <h2>Choose Deletion Method</h2>
+                <p>You can request deletion directly within the app, or generate an email request below.</p>
+            </div>
+
+            <!-- TAB HEADERS -->
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="switchTab('in-app')" id="tab-in-app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    1. Direct In-App (Instant)
+                </button>
+                <button class="tab-btn" onclick="switchTab('email')" id="tab-email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    2. Email Request
+                </button>
+            </div>
+
+            <!-- PANEL 1: IN-APP INSTRUCTIONS -->
+            <div class="tab-panel active" id="panel-in-app">
+                <div>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <span class="step-number">1</span>
+                            <div class="step-title">Open App Settings</div>
+                            <div class="step-desc">Launch <strong>Blink Out</strong> on your mobile device and navigate to the settings menu icon from the main screen lobby.</div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">2</span>
+                            <div class="step-title">Tap "Delete Account"</div>
+                            <div class="step-desc">Locate the dedicated red button in the settings panel marked "Delete Account".</div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">3</span>
+                            <div class="step-title">Confirm Action</div>
+                            <div class="step-desc">Confirm the alert dialog popup. Your profile and game progress will be immediately and permanently cleared.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- PHONE MOCKUP FOR WOW VISUALS -->
+                <div class="mockup-container">
+                    <div class="phone-mockup" id="device-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="phone-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                Game Settings
+                            </div>
+                            <div class="phone-menu-section">
+                                <div class="phone-menu-label">Preferences</div>
+                                <div class="phone-menu-item">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                                        Sound Effects
+                                    </span>
+                                    <span class="phone-arrow">ON</span>
+                                </div>
+                                <div class="phone-menu-item">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                                        Theme Color
+                                    </span>
+                                    <span class="phone-arrow">VIOLET</span>
+                                </div>
+                            </div>
+                            <div class="phone-menu-section">
+                                <div class="phone-menu-label">Profile & Cloud</div>
+                                <div class="phone-menu-item">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        Cloud Sign-In
+                                    </span>
+                                    <span class="phone-arrow" style="color: var(--accent-emerald);">LINKED</span>
+                                </div>
+                            </div>
+                            <!-- FLASHING WARNING BTN -->
+                            <div class="phone-btn-danger">
+                                Delete Account
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 2: EMAIL REQUEST FORM -->
+            <div class="tab-panel" id="panel-email">
+                <div>
+                    <h3 style="margin-top: 0;">Submit Request Via Email</h3>
+                    <p style="margin-bottom: 25px;">Provide your identifier details in the form helper to instantly construct a correctly formatted deletion request email to our support agents.</p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; margin-bottom: 20px;">
+                        <h4 style="font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            Instructions for Guest Users
+                        </h4>
+                        <p style="margin: 0; font-size: 0.85rem; line-height: 1.4;">If you are an anonymous/guest player, you do not need to email us! Simply stop playing, and your local profile is automatically wiped after <strong>30 days of inactivity</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <form id="deletion-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label">Identify Account By</label>
+                            <div class="radio-group">
+                                <label class="radio-tile selected" id="tile-email">
+                                    <input type="radio" name="identifier-type" value="email" checked onchange="toggleFormInputs()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    <span>Sign-in Email</span>
+                                </label>
+                                <label class="radio-tile" id="tile-playerid">
+                                    <input type="radio" name="identifier-type" value="playerid" onchange="toggleFormInputs()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <span>Player ID</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="input-email-group">
+                            <label class="form-label" for="user-email">Google / Apple Sign-In Email</label>
+                            <input type="email" id="user-email" class="form-input" placeholder="e.g., player@example.com" required>
+                            <p class="form-desc" style="margin-top: 6px;">The email address linked to your cloud profile.</p>
+                        </div>
+
+                        <div class="form-group" id="input-playerid-group" style="display: none;">
+                            <label class="form-label" for="user-playerid">Player ID</label>
+                            <input type="text" id="user-playerid" class="form-input" placeholder="e.g., BO-89721-XYZ">
+                            <p class="form-desc" style="margin-top: 6px;">Available inside your profile card settings.</p>
+                        </div>
+
+                        <button type="submit" class="form-submit-btn" id="btn-submit-form">
+                            <span>Draft Deletion Email</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Created by the Blink Out Team with a focus on fair play and privacy.
+        </div>
+    </div>
+
+    <!-- TAB LOGIC & FORM HANDLER -->
+    <script>
+        function switchTab(tabId) {
+            // Remove active status
+            document.getElementById('tab-in-app').classList.remove('active');
+            document.getElementById('tab-email').classList.remove('active');
+            document.getElementById('panel-in-app').classList.remove('active');
+            document.getElementById('panel-email').classList.remove('active');
+
+            if (tabId === 'in-app') {
+                document.getElementById('tab-in-app').classList.add('active');
+                document.getElementById('panel-in-app').classList.add('active');
+            } else {
+                document.getElementById('tab-email').classList.add('active');
+                document.getElementById('panel-email').classList.add('active');
+            }
+        }
+
+        function toggleFormInputs() {
+            const selectedType = document.querySelector('input[name="identifier-type"]:checked').value;
+            const emailGroup = document.getElementById('input-email-group');
+            const emailInput = document.getElementById('user-email');
+            const idGroup = document.getElementById('input-playerid-group');
+            const idInput = document.getElementById('user-playerid');
+
+            const emailTile = document.getElementById('tile-email');
+            const idTile = document.getElementById('tile-playerid');
+
+            if (selectedType === 'email') {
+                emailGroup.style.display = 'block';
+                emailInput.required = true;
+                idGroup.style.display = 'none';
+                idInput.required = false;
+
+                emailTile.classList.add('selected');
+                idTile.classList.remove('selected');
+            } else {
+                emailGroup.style.display = 'none';
+                emailInput.required = false;
+                idGroup.style.display = 'block';
+                idInput.required = true;
+
+                emailTile.classList.remove('selected');
+                idTile.classList.add('selected');
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const selectedType = document.querySelector('input[name="identifier-type"]:checked').value;
+            let identifierValue = '';
+            let identifierLabel = '';
+
+            if (selectedType === 'email') {
+                identifierValue = document.getElementById('user-email').value;
+                identifierLabel = 'Associated Email';
+            } else {
+                identifierValue = document.getElementById('user-playerid').value;
+                identifierLabel = 'Player ID';
+            }
+
+            const subject = encodeURIComponent('Blink Out - Account Deletion Request');
+            const emailBody = encodeURIComponent(
+`Hello Blink Out Support Team,
+
+I would like to request the permanent deletion of my Blink Out account and all associated data.
+
+Please find my account details below:
+- Account Verification Method: ${selectedType === 'email' ? 'Google/Apple Sign-In Email' : 'Unique Player ID'}
+- ${identifierLabel}: ${identifierValue}
+
+I understand that this action is permanent and will completely remove my authentication record, Firestore profile, progress, and match history from your Firebase servers. Please process this request within the 48-hour timeline specified in the Data Retention Policy.
+
+Regards,
+Blink Out Player`
+            );
+
+            // Construct mailto link and trigger
+            window.location.href = `mailto:support@blinkout.game?subject=${subject}&body=${emailBody}`;
+        }
+    </script>
+</body>
+</html>
