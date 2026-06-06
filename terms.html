@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Blink Out</title>
+    <title>Terms of Service | Blink Out</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -297,52 +297,6 @@
             font-weight: 500;
         }
 
-        /* --- DELETION BANNER --- */
-        .deletion-cta {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(217, 70, 239, 0.05) 100%);
-            border: 1px dashed rgba(139, 92, 246, 0.4);
-            border-radius: 14px;
-            padding: 20px;
-            margin-top: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .deletion-cta-text {
-            color: var(--text-primary);
-            font-size: 0.98rem;
-        }
-
-        .deletion-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary-gradient);
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
-        }
-
-        .deletion-cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-        }
-
-        .deletion-cta-btn svg {
-            transition: transform 0.3s ease;
-        }
-
-        .deletion-cta-btn:hover svg {
-            transform: translateX(4px);
-        }
-
         /* --- CONTACT CONTAINER --- */
         .contact-info {
             background: rgba(255, 255, 255, 0.02);
@@ -432,8 +386,8 @@
                 Blink Out
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link active" id="nav-policy-link">Privacy Policy</a>
-                <a href="terms.html" class="nav-link" id="nav-terms-link">Terms of Service</a>
+                <a href="index.html" class="nav-link" id="nav-policy-link">Privacy Policy</a>
+                <a href="terms.html" class="nav-link active" id="nav-terms-link">Terms of Service</a>
                 <a href="delete-account.html" class="nav-link delete-btn" id="nav-delete-link">Delete Account</a>
             </div>
         </div>
@@ -442,108 +396,77 @@
     <div class="container">
         <header>
             <div class="badge">Legal Agreement</div>
-            <h1 id="main-title">Privacy Policy</h1>
-            <p class="last-updated">Last Updated: June 2, 2026</p>
+            <h1 id="main-title">Terms of Service</h1>
+            <p class="last-updated">Last Updated: June 6, 2026</p>
         </header>
 
         <p class="intro">
-            Welcome to <strong>Blink Out</strong>. Your privacy is critically important to us. This Privacy Policy describes how your personal information is collected, used, and shared when you play our game.
+            Welcome to <strong>Blink Out</strong>, a real-time stare-down companion game created by <strong>Qlypto</strong>. By downloading, accessing, or playing our game, you agree to comply with and be bound by these Terms of Service. Please read them carefully.
         </p>
 
         <!-- SECTION 1 -->
-        <section id="section-data">
+        <section id="section-acceptance">
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                1. DATA COLLECTION & USE
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                1. ACCEPTANCE OF TERMS
             </h2>
-            
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                A. Camera Data & Face Detection
-            </h3>
-            <p>Blink Out uses the camera on your device to perform real-time face detection and eye-tracking for gameplay (detecting blinks).</p>
-            <ul>
-                <li><strong>Local Processing</strong>: All image and facial mesh data is processed <strong>locally</strong> on your device using on-device Machine Learning (ML Kit).</li>
-                <li><strong>No Storage</strong>: We do <strong>not</strong> record, store, or transmit raw camera feeds or facial images to our servers or any third parties.</li>
-                <li><strong>Purpose</strong>: This data is used solely to determine match outcomes within the active game session.</li>
-            </ul>
-
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                B. Account & Profile Data
-            </h3>
-            <p>If you sign in using a social account (Google or Apple), we collect:</p>
-            <ul>
-                <li><strong>Identity</strong>: Your unique User ID and Display Name.</li>
-                <li><strong>Game Progress</strong>: Your prestige, coins (score), match history, wins, and losses.</li>
-                <li><strong>Customization</strong>: Your mascot color preference and theme settings.</li>
-            </ul>
-            <p>This data is stored securely in <strong>Firebase</strong> to provide cross-device persistence and leaderboard functionality.</p>
+            <p>By using the Blink Out application (the "Game") or our web portal companion, you represent that you are at least 13 years of age. If you are under 18, you represent that you have obtained consent from a parent or legal guardian to play the Game.</p>
+            <p>If you do not agree to these Terms of Service, you must immediately cease all access and play of the Game.</p>
         </section>
 
         <!-- SECTION 2 -->
-        <section id="section-services">
+        <section id="section-privacy-link">
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                2. THIRD-PARTY SERVICES
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                2. PRIVACY POLICY
             </h2>
-            <p>We utilize the following third-party services to enhance your experience:</p>
-            <ul>
-                <li><strong>Firebase (Google)</strong>: For authentication, cloud database (Firestore/Realtime Database), and analytics.</li>
-                <li><strong>WebRTC</strong>: For real-time multiplayer signaling (P2P). No data from these streams is recorded by us.</li>
-                <li><strong>Google Fonts</strong>: For typography rendering.</li>
-            </ul>
+            <p>Your privacy is important to us. Our data handling practices, including our strict policy on zero raw camera image storage and local ML processing, are detailed in our Privacy Policy.</p>
+            <p>Our Privacy Policy is fully incorporated into these Terms of Service. You can review it at any time here: <a href="index.html" style="color: var(--primary-light); text-decoration: none; font-weight: 600;">Privacy Policy</a>.</p>
         </section>
 
         <!-- SECTION 3 -->
-        <section id="section-security">
+        <section id="section-accounts">
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                3. DATA SECURITY
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                3. ACCOUNTS AND CLOUD SYNC
             </h2>
-            <p>We use industry-standard security measures provided by Firebase to protect your progress and profile data. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
+            <p>To persist progress and access leaderboards, players may log in via social credentials (Google or Apple sign-in). You are solely responsible for maintaining the confidentiality of your login tokens.</p>
+            <ul>
+                <li><strong>Anonymous Profiles:</strong> You may choose to play anonymously as a Guest. Guest account progress is cached locally and synchronized with server caches but will be lost if you clear your device data or uninstall the Game.</li>
+                <li><strong>Data Retention:</strong> Active accounts will retain scores. Inactive guest profiles are automatically deleted after <strong>30 days of inactivity</strong> to prevent database overhead.</li>
+                <li><strong>Deletion Request:</strong> You can permanently wipe your account at any time. Refer to the <a href="delete-account.html" style="color: var(--primary-light); text-decoration: none; font-weight: 600;">Account Deletion Instructions</a>.</li>
+            </ul>
         </section>
 
         <!-- SECTION 4 -->
-        <section id="section-choices">
+        <section id="section-gameplay">
             <h2>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
-                4. USER CHOICES
+                4. GAME RULES & VIRTUAL ITEMS
             </h2>
+            <p>Blink Out is a skill-based staring contest game. All virtual currencies, scores, achievements, and prestige ranks acquired in the Game are virtual items with **no real-world monetary value**.</p>
             <ul>
-                <li><strong>Anonymous Play</strong>: You can play Blink Out anonymously without signing in. Note that progress will be lost if you delete the app or change devices.</li>
-                <li>
-                    <strong>Data Deletion</strong>: You may request the deletion of your account and associated progress data at any time directly through the app's settings menu or through our deletion request page.
-                    
-                    <div class="deletion-cta">
-                        <div class="deletion-cta-text">
-                            Looking to delete your account and remove all personal information? You can do this directly within the game, or submit a request on our dedicated page.
-                        </div>
-                        <a href="delete-account.html" class="deletion-cta-btn" id="deletion-policy-cta-btn">
-                            Manage Account Deletion
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </a>
-                    </div>
-                </li>
+                <li><strong>No Ownership:</strong> You do not own the virtual coins or progress. Qlypto reserves the right to manage, modify, or eliminate virtual progress at our sole discretion.</li>
+                <li><strong>Cheating & Exploits:</strong> Any attempt to inject fake WebSocket blink events, bypass on-device eye tracking, or manipulate leaderboards is strictly prohibited and will result in permanent account termination.</li>
             </ul>
         </section>
 
         <!-- SECTION 5 -->
-        <section id="section-children">
+        <section id="section-intellectual">
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                5. CHILDREN'S PRIVACY
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                5. INTELLECTUAL PROPERTY
             </h2>
-            <p>Blink Out is designed for a general audience. We do not knowingly collect personal information from children under the age of 13. If you believe a child has provided us with personal data, please contact us immediately.</p>
+            <p>All assets, artwork, layouts, sound effects, matching engines, server source code, and game mechanics associated with Blink Out are the exclusive intellectual property of Qlypto and its licensors. You are granted a limited, non-exclusive, non-transferable, revocable license to access and play the Game strictly for personal entertainment.</p>
         </section>
 
         <!-- SECTION 6 -->
-        <section id="section-changes">
+        <section id="section-disclaimers">
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                6. CHANGES TO THIS POLICY
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                6. DISCLAIMERS & LIMITATIONS
             </h2>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this document.</p>
+            <p>THE GAME IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. QLYPTO MAKES NO WARRANTIES, EXPRESS OR IMPLIED, REGARDING THE GAME'S UP-TIME, SERVER RELIABILITY, OR ERROR-FREE STATUS. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL QLYPTO BE LIABLE FOR ANY DAMAGES ARISING FROM YOUR PLAY OF THE GAME.</p>
         </section>
 
         <!-- SECTION 7 -->
@@ -552,13 +475,13 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 7. CONTACT US
             </h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+            <p>If you have any questions or feedback regarding these Terms of Service, please reach out to our team:</p>
             <div class="contact-info">
                 <div class="contact-details">
                     <a href="mailto:support@blinkout.game" class="contact-email" id="contact-email-link">support@blinkout.game</a>
-                    <p style="margin: 0; font-size: 0.9rem;">Available 24/7 for game support and privacy inquiries.</p>
+                    <p style="margin: 0; font-size: 0.9rem;">We typically respond to support tickets within 24 hours.</p>
                 </div>
-                <a href="mailto:support@blinkout.game" class="contact-btn" id="contact-btn-mailto">Send Email</a>
+                <a href="mailto:support@blinkout.game" class="contact-btn" id="contact-btn-mailto">Get Support</a>
             </div>
         </section>
 
