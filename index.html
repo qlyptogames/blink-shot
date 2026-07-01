@@ -302,41 +302,41 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                 A. Camera Data &amp; Face Detection
             </h3>
-            <p>Blink Out uses the camera on your device to perform real-time face detection and eye-tracking for gameplay (detecting blinks).</p>
+            <p>Blink Out uses the camera on your device to detect blinks and determine gameplay outcomes in real-time.</p>
             <ul>
-                <li><strong>Local Processing:</strong> All image and facial mesh data is processed <strong>locally</strong> on your device using on-device Machine Learning (ML Kit).</li>
-                <li><strong>No Storage:</strong> We do <strong>not</strong> record, store, or transmit raw camera feeds or facial images to our servers or any third parties.</li>
-                <li><strong>Purpose:</strong> This data is used solely to determine match outcomes within the active game session.</li>
+                <li><strong>Local Processing:</strong> All facial scanning and blink detection is processed directly on your device.</li>
+                <li><strong>No Storage:</strong> We do <strong>not</strong> save, record, or share your camera stream or face data with anyone.</li>
+                <li><strong>Purpose:</strong> Camera access is used solely to determine match outcomes during your active play session.</li>
             </ul>
 
             <h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 B. Account &amp; Profile Data
             </h3>
-            <p>If you sign in using a social account (Google or Apple), we collect:</p>
+            <p>If you sign in using a Google or Apple account, we save:</p>
             <ul>
-                <li><strong>Identity:</strong> Your unique User ID and Display Name.</li>
-                <li><strong>Game Progress:</strong> Your prestige, coins (score), match history, wins, and losses.</li>
+                <li><strong>Identity:</strong> Your unique User ID and Profile Name.</li>
+                <li><strong>Game Progress:</strong> Your prestige levels, coins (scores), match history, wins, and losses.</li>
                 <li><strong>Customization:</strong> Your mascot color preference and theme settings.</li>
             </ul>
-            <p>This data is stored securely in <strong>Firebase</strong> to provide cross-device persistence and leaderboard functionality.</p>
+            <p>This data is stored securely on our servers to let you play across different devices and display your achievements on the high score leaderboards.</p>
         </section>
 
         <!-- Section 2 -->
         <section id="section-services">
             <h2><span class="num-badge">2</span> Third-Party Services</h2>
-            <p>We utilize the following third-party services to enhance your experience:</p>
+            <p>We use trusted partners to help run the game safely and connect you with others:</p>
             <ul>
-                <li><strong>Firebase (Google):</strong> For authentication, cloud database (Firestore/Realtime Database), and analytics.</li>
-                <li><strong>WebRTC:</strong> For real-time multiplayer signaling (P2P). No data from these streams is recorded by us.</li>
-                <li><strong>Google Fonts:</strong> For typography rendering.</li>
+                <li><strong>Cloud Services:</strong> To log you in, securely save your game progress, and analyze how the game runs.</li>
+                <li><strong>Multiplayer Connections:</strong> To connect you directly with other players during live matches (we do not store your private match connections).</li>
+                <li><strong>Font Services:</strong> To display game text correctly on your screen.</li>
             </ul>
         </section>
 
         <!-- Section 3 -->
         <section id="section-security">
             <h2><span class="num-badge">3</span> Data Security</h2>
-            <p>We use industry-standard security measures provided by Firebase to protect your progress and profile data. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
+            <p>We use industry-standard security measures to protect your game scores and profile. While we work hard to keep everything safe, no transmission over the internet is completely risk-free.</p>
         </section>
 
         <!-- Section 4 -->
