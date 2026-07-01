@@ -151,28 +151,11 @@
         }
         .methods-title p { color:var(--muted); font-size:.96rem; }
 
-        /* ─── TABS ─── */
-        .tabs-header {
-            display:flex; background:rgba(255,255,255,.03);
-            border:1px solid var(--border);
-            padding:5px; border-radius:14px; margin-bottom:30px; gap:5px;
+        /* ─── DELETION CONTENT PANEL ─── */
+        .tab-panel {
+            display:grid; grid-template-columns:1.2fr 1fr; gap:36px; align-items:center;
+            animation:fadeIn .35s ease forwards;
         }
-        .tab-btn {
-            flex:1; background:none; border:none; color:var(--muted);
-            padding:11px 14px; border-radius:10px;
-            font-family:var(--font-body); font-size:.92rem; font-weight:800;
-            cursor:pointer; transition:all .25s;
-            display:flex; align-items:center; justify-content:center; gap:7px;
-        }
-        .tab-btn:hover { color:#fff; background:rgba(255,255,255,.03); }
-        .tab-btn.active {
-            background:var(--cyan); color:var(--bg);
-            box-shadow:0 4px 16px rgba(19,200,236,.3);
-        }
-
-        /* ─── TAB PANELS ─── */
-        .tab-panel { display:none; animation:fadeIn .35s ease forwards; }
-        .tab-panel.active { display:grid; grid-template-columns:1.2fr 1fr; gap:36px; align-items:center; }
 
         @keyframes fadeIn {
             from { opacity:0; transform:translateY(8px); }
@@ -339,10 +322,9 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .info-grid { grid-template-columns:1fr; }
-            .tab-panel.active { grid-template-columns:1fr; gap:28px; }
+            .tab-panel { grid-template-columns:1fr; gap:28px; }
             .mockup-container { order:-1; }
             .methods-section { padding:22px 16px; }
-            .tabs-header { flex-direction:column; }
         }
         @media (max-width: 600px) {
             body { padding-top:76px; }
@@ -438,7 +420,7 @@
                 <ul class="info-list">
                     <li>
                         <svg class="li-ico" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        <strong>Permanent Accounts:</strong> Accounts linked to Google/Apple credentials submitted via email are fully purged within <strong>48 hours</strong>.
+                        <strong>Permanent Accounts:</strong> Accounts linked to Google/Apple credentials deleted via app settings are fully purged from all backups within <strong>48 hours</strong>.
                     </li>
                     <li>
                         <svg class="li-ico" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -451,40 +433,28 @@
         <!-- MAIN DELETION FLOWS -->
         <div class="methods-section" id="section-deletion-flow">
             <div class="methods-title">
-                <h2>Choose Deletion Method</h2>
-                <p>You can request deletion directly within the app, or generate an email request below.</p>
+                <h2>In-App Deletion Instructions</h2>
+                <p>You can request account deletion directly within the app. Follow the steps below to permanently delete your account and all associated progress.</p>
             </div>
 
-            <!-- TABS -->
-            <div class="tabs-header">
-                <button class="tab-btn active" onclick="switchTab('in-app')" id="tab-in-app">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                    1. Direct In-App (Instant)
-                </button>
-                <button class="tab-btn" onclick="switchTab('email')" id="tab-email">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    2. Email Request
-                </button>
-            </div>
-
-            <!-- PANEL 1: IN-APP -->
-            <div class="tab-panel active" id="panel-in-app">
+            <!-- PANEL: IN-APP -->
+            <div class="tab-panel" id="panel-in-app">
                 <div>
                     <ul class="step-list">
                         <li class="step-item">
                             <span class="step-number">1</span>
-                            <div class="step-title">Open App Settings</div>
-                            <div class="step-desc">Launch <strong>Blink Out</strong> on your mobile device and navigate to the settings menu icon from the main screen lobby.</div>
+                            <div class="step-title">Open Profile Screen</div>
+                            <div class="step-desc">Launch <strong>Blink Out</strong> on your mobile device and tap your profile avatar/name on the home screen lobby.</div>
                         </li>
                         <li class="step-item">
                             <span class="step-number">2</span>
-                            <div class="step-title">Tap "Delete Account"</div>
-                            <div class="step-desc">Locate the dedicated red button in the settings panel marked "Delete Account".</div>
+                            <div class="step-title">Go to Profile Settings</div>
+                            <div class="step-desc">Tap the settings gear icon located in the top-right corner of your profile screen.</div>
                         </li>
                         <li class="step-item">
                             <span class="step-number">3</span>
-                            <div class="step-title">Confirm Action</div>
-                            <div class="step-desc">Confirm the alert dialog popup. Your profile and game progress will be immediately and permanently cleared.</div>
+                            <div class="step-title">Tap "Delete Account" &amp; Confirm</div>
+                            <div class="step-desc">Locate the dedicated red button marked "Delete Account" in the settings panel and confirm the alert popup.</div>
                         </li>
                     </ul>
                 </div>
@@ -559,61 +529,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- PANEL 2: EMAIL REQUEST -->
-            <div class="tab-panel" id="panel-email">
-                <div class="email-panel-grid">
-                    <div>
-                        <h3 style="font-family:var(--font-head);font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;margin-bottom:8px;">Submit Request Via Email</h3>
-                        <p style="color:var(--muted);font-size:.93rem;margin-bottom:20px;">Provide your identifier details in the form below to instantly construct a correctly formatted deletion request email to our support agents.</p>
-
-                        <div class="info-box" style="margin-bottom:0;">
-                            <h4>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                                Instructions for Guest Users
-                            </h4>
-                            <p>If you are an anonymous/guest player, you do not need to email us! Simply stop playing, and your local profile is automatically wiped after <strong>30 days of inactivity</strong>.</p>
-                        </div>
-                    </div>
-
-                    <div class="form-container">
-                        <form id="deletion-form" onsubmit="handleFormSubmit(event)">
-                            <div class="form-group">
-                                <label class="form-label">Identify Account By</label>
-                                <div class="radio-group">
-                                    <label class="radio-tile selected" id="tile-email">
-                                        <input type="radio" name="identifier-type" value="email" checked onchange="toggleFormInputs()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                        <span>Sign-in Email</span>
-                                    </label>
-                                    <label class="radio-tile" id="tile-other">
-                                        <input type="radio" name="identifier-type" value="other" onchange="toggleFormInputs()">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                        <span>Username / Other</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group" id="input-email-group">
-                                <label class="form-label" for="user-email">Google / Apple Sign-In Email</label>
-                                <input type="email" id="user-email" class="form-input" placeholder="e.g., player@example.com" required>
-                                <p class="form-desc">The email address linked to your cloud profile.</p>
-                            </div>
-
-                            <div class="form-group" id="input-other-group" style="display:none;">
-                                <label class="form-label" for="user-other">Username / Display Name / Alternative Details</label>
-                                <input type="text" id="user-other" class="form-input" placeholder="e.g., CoolPlayer99">
-                                <p class="form-desc">Provide your in-game display name, level, or other descriptive details to help our team locate your profile.</p>
-                            </div>
-
-                            <button type="submit" class="form-submit-btn" id="btn-submit-form">
-                                <span>Draft Deletion Email</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -658,61 +573,7 @@
         </div>
     </footer>
 
-    <script>
-        function switchTab(tabId) {
-            ['tab-in-app','tab-email','panel-in-app','panel-email'].forEach(id => {
-                document.getElementById(id).classList.remove('active');
-            });
-            if (tabId === 'in-app') {
-                document.getElementById('tab-in-app').classList.add('active');
-                document.getElementById('panel-in-app').classList.add('active');
-            } else {
-                document.getElementById('tab-email').classList.add('active');
-                document.getElementById('panel-email').classList.add('active');
-            }
-        }
 
-        function toggleFormInputs() {
-            const val = document.querySelector('input[name="identifier-type"]:checked').value;
-            const eg = document.getElementById('input-email-group');
-            const ei = document.getElementById('user-email');
-            const og = document.getElementById('input-other-group');
-            const oi = document.getElementById('user-other');
-            eg.style.display = 'none'; ei.required = false;
-            og.style.display = 'none'; oi.required = false;
-            document.getElementById('tile-email').classList.remove('selected');
-            document.getElementById('tile-other').classList.remove('selected');
-            if (val === 'email') {
-                eg.style.display='block'; ei.required=true;
-                document.getElementById('tile-email').classList.add('selected');
-            } else {
-                og.style.display='block'; oi.required=true;
-                document.getElementById('tile-other').classList.add('selected');
-            }
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const val = document.querySelector('input[name="identifier-type"]:checked').value;
-            const id  = val==='email' ? document.getElementById('user-email').value : document.getElementById('user-other').value;
-            const lbl = val==='email' ? 'Associated Email' : 'In-game Username / Details';
-            const sub = encodeURIComponent('Blink Out - Account Deletion Request');
-            const body = encodeURIComponent(
-`Hello Blink Out Support Team,
-
-I would like to request the permanent deletion of my Blink Out account and all associated data.
-
-Account Verification Method: ${val==='email' ? 'Google/Apple Sign-In Email' : 'In-game Username / Details'}
-${lbl}: ${id}
-
-I understand that this action is permanent and will completely remove my authentication record, Firestore profile, progress, and match history. Please process this request within the 48-hour timeline.
-
-Regards,
-Blink Out Player`
-            );
-            window.location.href = `mailto:support@blinkout.game?subject=${sub}&body=${body}`;
-        }
-    </script>
 
     <script>
         if ('serviceWorker' in navigator) {
